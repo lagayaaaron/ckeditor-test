@@ -1,0 +1,37 @@
+<%= form_with(model: borrowing, class: "contents") do |form| %>
+  <% if borrowing.errors.any? %>
+    <div id="error_explanation" class="px-3 py-2 mt-3 font-medium text-red-500 rounded-lg bg-red-50">
+      <h2><%= pluralize(borrowing.errors.count, "error") %> prohibited this borrowing from being saved:</h2>
+
+      <ul>
+        <% borrowing.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :book_id %>
+    <%= form.collection_select :book_id, Book.all, :id, :title, class: 'border-gray-300 border rounded-lg px-4 py-2' %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :borrower_id %>
+    <%= form.collection_select :borrower_id, Borrower.all, :id, :name, class: 'border-gray-300 border rounded-lg px-4 py-2' %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :borrowed_on %>
+    <%= form.date_field :borrowed_on, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :returned_on %>
+    <%= form.date_field :returned_on, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>
